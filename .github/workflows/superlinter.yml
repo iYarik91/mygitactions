@@ -10,6 +10,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Cache Docker Images
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            docker-${{ runner.os }}-
+
       
       - name: Create cache directories
         run: mkdir -p ~/.cache ~/.npm ~/.cache/pip
@@ -27,7 +36,7 @@ jobs:
             linter-${{ runner.os }}-
 
       - name: Run Super-Linter
-        uses: github/super-linter@v5
+        uses: github/super-linter@latest
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
