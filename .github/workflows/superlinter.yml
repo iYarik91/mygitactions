@@ -18,7 +18,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache
-          key: linter-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/requirements.txt') }}
+          key: > 
+            linter-${{ runner.os }}-${{ hashFiles(
+              '**/package-lock.json',
+              '**/requirements.txt'
+            ) }}
           restore-keys: |
             linter-${{ runner.os }}-
 
