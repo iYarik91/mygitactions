@@ -11,6 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Ensure Docker Cache Directory Exists
+        run: mkdir -p /tmp/.docker-cache 
+
       - name: Cache Docker Images
         uses: actions/cache@v3
         with:
@@ -18,7 +21,6 @@ jobs:
           key: docker-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
             docker-${{ runner.os }}-
-
       
       - name: Create cache directories
         run: mkdir -p ~/.cache ~/.npm ~/.cache/pip
