@@ -10,7 +10,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-            
+      
+      - name: Create cache directories
+        run: mkdir -p ~/.cache ~/.npm ~/.cache/pip
+      
       - name: Cache Linter Dependencies
         uses: actions/cache@v3
         with:
